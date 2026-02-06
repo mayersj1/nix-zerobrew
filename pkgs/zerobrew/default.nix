@@ -33,7 +33,7 @@ rustPlatform.buildRustPackage {
   ];
   cargoTestFlags = [
     "--package"
-    "zb_cli -p zb_cli --lib"
+    "zb_cli"
   ];
 
   nativeBuildInputs = [
