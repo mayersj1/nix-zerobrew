@@ -57,6 +57,7 @@
             buildInputs =
               with pkgs;
               [
+                just
                 rustc
                 cargo
                 openssl
