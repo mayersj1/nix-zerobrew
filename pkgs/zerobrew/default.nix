@@ -3,14 +3,15 @@
 # Zerobrew is a fast macOS package manager written in Rust.
 # This derivation builds the `zb` CLI binary from the workspace.
 
-{ lib
-, rustPlatform
-, zerobrew-src
-, openssl
-, pkg-config
-, stdenv
-, apple-sdk_15
-, darwinMinVersionHook
+{
+  lib,
+  rustPlatform,
+  zerobrew-src,
+  openssl,
+  pkg-config,
+  stdenv,
+  apple-sdk_15,
+  darwinMinVersionHook,
 }:
 
 rustPlatform.buildRustPackage {
@@ -26,8 +27,14 @@ rustPlatform.buildRustPackage {
   };
 
   # Build only the CLI crate
-  cargoBuildFlags = [ "--package" "zb_cli" ];
-  cargoTestFlags = [ "--package" "zb_cli" ];
+  cargoBuildFlags = [
+    "--package"
+    "zb_cli"
+  ];
+  cargoTestFlags = [
+    "--package"
+    "zb_cli -p zb_cli --lib"
+  ];
 
   nativeBuildInputs = [
     pkg-config
@@ -35,7 +42,8 @@ rustPlatform.buildRustPackage {
 
   buildInputs = [
     openssl
-  ] ++ lib.optionals stdenv.hostPlatform.isDarwin [
+  ]
+  ++ lib.optionals stdenv.hostPlatform.isDarwin [
     apple-sdk_15
     (darwinMinVersionHook "10.15")
   ];
