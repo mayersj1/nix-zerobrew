@@ -57,15 +57,13 @@
             buildInputs =
               with pkgs;
               [
-                just
                 rustc
                 cargo
                 openssl
                 pkg-config
               ]
               ++ pkgs.lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
-                #pkgs.apple-sdk_15
-                pkgs.apple-sdk_26
+                pkgs.apple-sdk_15
                 (pkgs.darwinMinVersionHook "10.15")
               ];
           };

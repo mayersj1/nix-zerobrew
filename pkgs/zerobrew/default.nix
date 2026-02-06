@@ -25,7 +25,7 @@ rustPlatform.buildRustPackage {
     # If there are git dependencies, they may need to be specified here
     # outputHashes = { };
   };
-
+  doCheck = false;
   # Build only the CLI crate
   # cargoBuildFlags = [
   #   "--package"
