@@ -32,7 +32,7 @@
             inherit zerobrew-src;
           };
 
-          default = self.packages.${system}.zerobrew;
+          default = self.packages.${pkgs.stdenv.hostPlatform.system}.zerobrew;
         }
       );
 
