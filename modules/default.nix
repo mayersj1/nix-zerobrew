@@ -9,7 +9,7 @@
 # - No tap system
 #
 # During activation, we create the required directory structure and
-# symlink the Nix-built `zb` binary to `/opt/zerobrew/prefix/bin/zb`.
+# symlink the Nix-built `zb` binary to `/opt/zerobrew/bin/zb`.
 
 { pkgs, lib, config, options, ... }:
 let
@@ -32,7 +32,7 @@ let
     set -euo pipefail
     export ZEROBREW_PREFIX="${zerobrewPrefix}"
     export NIX_ZB_BIN="${cfg.package}/bin/zb"
-    export PATH="${zerobrewPrefix}/prefix/bin:$PATH"
+    export PATH="${zerobrewPrefix}/bin:$PATH"
   '' + (lib.optionalString (cfg.extraEnv != {})
         (lib.concatLines (lib.mapAttrsToList (name: value: "export ${name}=${lib.escapeShellArg value}") cfg.extraEnv)))
      + (builtins.readFile ./zb.tail.sh));
@@ -88,7 +88,7 @@ let
     fi
 
     # Link the Nix-built zb binary
-    BIN_ZB="$ZEROBREW_PREFIX/prefix/bin/zb"
+    BIN_ZB="$ZEROBREW_PREFIX/bin/zb"
     if is_occupied "$BIN_ZB"; then
       error "An existing $BIN_ZB is in the way"
       exit 1
@@ -183,20 +183,20 @@ in {
 
     # Shell integrations - add zerobrew prefix bin to PATH
     programs.bash.interactiveShellInit = lib.mkIf cfg.enableBashIntegration ''
-      if [ -d "${zerobrewPrefix}/prefix/bin" ]; then
-        export PATH="${zerobrewPrefix}/prefix/bin:$PATH"
+      if [ -d "${zerobrewPrefix}/bin" ]; then
+        export PATH="${zerobrewPrefix}/bin:$PATH"
       fi
     '';
 
     programs.zsh.interactiveShellInit = lib.mkIf cfg.enableZshIntegration ''
-      if [ -d "${zerobrewPrefix}/prefix/bin" ]; then
-        export PATH="${zerobrewPrefix}/prefix/bin:$PATH"
+      if [ -d "${zerobrewPrefix}/bin" ]; then
+        export PATH="${zerobrewPrefix}/bin:$PATH"
       fi
     '';
 
     programs.fish.interactiveShellInit = lib.mkIf cfg.enableFishIntegration ''
-      if test -d "${zerobrewPrefix}/prefix/bin"
-        fish_add_path "${zerobrewPrefix}/prefix/bin"
+      if test -d "${zerobrewPrefix}/bin"
+        fish_add_path "${zerobrewPrefix}/bin"
       end
     '';
 
