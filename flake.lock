@@ -25,11 +25,11 @@
     "zerobrew-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1770599495,
-        "narHash": "sha256-MQsa/LBPZ8XBH01ZXxwnMnMRvchBeORa9b2DbEgf5IU=",
+        "lastModified": 1770679932,
+        "narHash": "sha256-XqTf1cPmemJ23PBB2L/qrDBnGiupMPS9Ef9fv/XTAZ0=",
         "owner": "lucasgelfond",
         "repo": "zerobrew",
-        "rev": "224b75cf3a6209fef709bb98e087df1ced8bf413",
+        "rev": "6f126e2ff4b63f9622a9050595eac012476a1193",
         "type": "github"
       },
       "original": {
